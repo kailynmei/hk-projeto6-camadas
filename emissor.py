@@ -35,7 +35,7 @@ nomeAcorde, frequencias = acordes[opcao]
 f1, f2, f3 = frequencias
 
 # 3. Gerando o sinal no tempo
-t = np.linsopace(0, duracao, int(fs * duracao), endpoint = False) # vetor de tempo
+t = np.linspace(0, duracao, int(fs * duracao), endpoint = False) # vetor de tempo
 # gerando as 3 senóides
 s1 = np.sin(2 * np.pi * f1 * t)
 s2 = np.sin(2 * np.pi * f2 * t)
@@ -52,12 +52,12 @@ sd.wait()
 # 5. Gráfico no domínio do tempo
 amostrasPlot = 1000
 plt.figure(figsize=(10, 4))
-plt.plot(t[:amostrasPlot], tone[:amostrasPlot])
+plt.plot(t[:amostrasPlot], tone[:amostrasPlot], color="pink", label="Sinal emitido")
 plt.title(f"Sinal no tempo - {nomeAcorde}")
 plt.xlabel("Tempo (s)")
 plt.ylabel("Amplitude")
+plt.legend()
 plt.grid()
-plt.show()
 
 # 6. Gráfico no domínio da frequência
 # o gráfico da FFT mostra quais freqs compõem o sinal e 
@@ -70,10 +70,12 @@ freqsPos = freqs[:metade]
 magnitudes = np.abs(fftVals[:metade]) / N
 
 plt.figure(figsize=(10, 4))
-plt.plot(freqsPos, magnitudes)
+plt.plot(freqsPos, magnitudes, color="hotpink", label="FFT do sinal")
 plt.title(f"Espectro de frequência - {nomeAcorde}")
 plt.xlabel("Frequência (Hz)")
 plt.ylabel("Magnitude")
 plt.xlim(0, 2000)
+plt.legend()
 plt.grid()
-plt.show()
+
+plt.show() # colocamos só 1 p mostrar os 2 juntos
